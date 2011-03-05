@@ -67,18 +67,15 @@ NOTES
 FUTURE DEVELOPMENT IDEAS
 --------------------------------------------------------------------------------------		
  
- il8n for all display messages
- GA Plugin
- Audit Trail
- Permissions
+ internationalization (i8ln) for all text + messages
+ Google Analytics Plugin
+ Audit Trail (login/logout/forgotpass/)
+ Permissions based rules for roles
  Import data / Data Migration
- different email templates html/txt/pdf/image
- other ways to send notifications email/sms/twitter
- 
- view current session?
- view all sessions?
- configuration for password requirements? 
- configuration for username requirements?
+ Different email templates HTML/Text/PDF/Image
+ Additional methods to send notifications Email/SMS/Twitter
+ Session Track (current/all)
+ Username/Password requirements configuration
  
 --------------------------------------------------------------------------------------
 BUGS
