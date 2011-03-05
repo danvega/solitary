@@ -1,0 +1,9 @@
+form {width:100%;margin:0px;padding:0px;}
+fieldset{}
+legend{font-size:12px;font-weight:bold;color:#336699;}
+label{width:150px;float:left}
+input[type="text"]{width:200px}
+select {min-width:200px;}
+.submit{padding:10px 0px;}
+.required{font-size:15px;font-weight:bold;color:red;}
+.comments{width:575px;height:100px;}
