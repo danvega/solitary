@@ -54,10 +54,6 @@ NOTES
 		// An array of modules names to NOT load, empty means none
 		exclude = [] 
 	};	
-
-	* limitation for version 0.1 is that you can only assign a single role to a user 
-	* I will fix this shortly
-	
 	
 	* Update your robots.txt so this module doesn't get picked up by the search engine
  		
