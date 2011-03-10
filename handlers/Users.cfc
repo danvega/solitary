@@ -28,24 +28,15 @@
 	public void function save(event){
 		var rc = event.getCollection();		
 		var oUser = populateModel( userService.get(id=rc.userID) );
-		
-		//clear roles
-		oUser.setRoles([]);
-		// for each role in list admin,author,audit,etc
-		for(var i=1; i<=listLen(rc.roles); ++i){
-			var role = roleService.get(listGetAt(rc.roles,i));
-			oUser.addRole(role);
-			role.addUser(oUser);
-		}
-		
+				
 		if(len(rc.addrole)){
-			var role = roleService.new();
-			role.setName(rc.addrole);
-			role.addUser(oUser);
-			roleService.save(role);
-			
-			oUser.addRole(role);
+			var role = roleService.new(properties={name=rc.addrole});			
+			roleService.save(entity=role,flush=true);
+			rc.roles = listAppend(rc.roles,role.getRoleId());
 		}
+		
+		// add a list of roles to the user (list of ids)
+		oUser.addRoles(rc.roles);
 		
 		userService.save( oUser );
 		getPlugin("MessageBox").setMessage("info","User saved!");

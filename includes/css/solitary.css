@@ -7,3 +7,6 @@ select {min-width:200px;}
 .submit{padding:10px 0px;}
 .required{font-size:15px;font-weight:bold;color:red;}
 .comments{width:575px;height:100px;}
+.session {border:1px solid #ddd;margin:0 0 10px 0;}
+.sessionkey {background-color:#f6f6f6;color:#242424;padding:5px;cursor:hand;cursor:pointer;	}
+.user-data {padding:5px;display:none;}

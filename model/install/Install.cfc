@@ -59,8 +59,6 @@ component accessors="true" {
 				// try and find the role by name
 				var r = roleService.findWhere({name=listGetAt(user.xmlChildren[6].xmlText,x)});
 				u.addRole(r);
-				r.addUser(u);
-				roleService.save(r);	
 			}
 			
 			userService.save(u);

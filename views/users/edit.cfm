@@ -41,7 +41,7 @@
 			<label for="roles">Role(s):</label>
 			<select name="roles" multiple="true">
 				<cfloop array="#rc.roles#" index="role">
-					<option value="#role.getRoleId()#" <cfif role.hasUser(rc.user)>selected</cfif>>#role.getName()#</option>
+					<option value="#role.getRoleId()#" <cfif rc.user.hasRole(role)>selected</cfif>>#role.getName()#</option>
 				</cfloop>
 			</select>			
 		</div>

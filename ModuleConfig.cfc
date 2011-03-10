@@ -60,7 +60,9 @@ component {
 			{pattern="/roles/list", handler="roles",action="list"},
 			{pattern="/roles/edit/:id?", handler="roles",action="edit"},
 			{pattern="/roles/save", handler="roles",action="save"},
-			{pattern="/roles/remove", handler="roles",action="remove"}		
+			{pattern="/roles/remove", handler="roles",action="remove"},
+			{pattern="/sessiontracking/current", handler="sessiontracking",action="current"},		
+			{pattern="/sessiontracking/active", handler="sessiontracking",action="active"}					
 		];
 		
 		// Custom Declared Points

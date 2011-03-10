@@ -27,6 +27,18 @@ component persistent="true" extends="solitary.model.BaseEntity" table="users"{
 		return roles;
 	}
 	
+	public void function addRoles(required string roles){
+		if( len(arguments.roles) ){
+			//clear roles
+			setRoles([]);
+			// for each role in list admin,author,audit,etc
+			for(var i=1; i<=listLen(arguments.roles); ++i){
+				var role = entityLoadByPK("Role",listGetAt(arguments.roles,i));
+				this.addRole(role);
+			}
+		}
+	}	
+	
 	public void function setPassword(String password){
 		variables.password = hash(arguments.password);	
 	}
