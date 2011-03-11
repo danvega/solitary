@@ -6,10 +6,12 @@ component persistent="true" extends="solitary.model.BaseEntity" table="users"{
 	 * @notempty 
 	 */
 	property name="firstName";
+	
 	/** 
 	 * @notempty 
 	 */
 	property name="lastName";
+	
 	/** 
 	 * @notempty 
 	 * @range 5,20
