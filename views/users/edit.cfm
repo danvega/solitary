@@ -1,6 +1,6 @@
-<h1>User Editor</h1>
-
 <cfoutput>
+<h1>User Editor</h1>
+#getPlugin("MessageBox").renderit()#
 <form action="#event.buildLink('security.users.save')#" method="POST" name="newPostForm">
 	<input type="hidden" name="userID" id="userID" value="#rc.user.getUserID()#" />
 	
@@ -25,12 +25,14 @@
 		<legend>Login Information</legend>
 		<div>
 			<label for="username">Username:</label>
-			<input type="text" name="username" value="#rc.user.getUsername()#"/>
+			<input type="text" id="username" name="username" value="#rc.user.getUsername()#"/>
+			<span id="validateUsername" class="help">between 5-20 characters</span>
 		</div>		
 		<cfif NOT len(rc.user.getUserID())>
 		<div>
 			<label for="password">Password:</label>
 			<input type="password" name="password" value=""/>
+			<a id="generate" href="##">Generate Password</a>
 		</div>	
 		<div>
 			<label for="confirmPassword">Confirm Password:</label>
@@ -61,4 +63,72 @@
 		<input type="submit" value="Save">
 	</div>
 </form>
+
+<script type="application/javascript">
+
+	$(function(){
+		var pass = password(8).toUpperCase();
+		$('##generate').click(function(event){
+			event.preventDefault();
+			$("input[type='password']").val(pass);
+		});
+		var $validateUsername = $("##validateUsername");
+		$('##username').keyup(function(){
+			var t = this;
+			
+			if(this.value.length > 0){
+				if(this.value != this.lastValue) {
+					if(this.timer)clearTimeout(this.time);
+					
+					$validateUsername
+						.removeClass('unavailable')
+						.html('<img src="#event.getModuleRoot()#/includes/images/ajax-loader.gif" width="16"/> check availibility ...');
+					
+					this.timer = setTimeout(function(){
+						$.ajax({
+							url: '#event.buildLink("security.users.usernameExists")#/' + t.value,
+							type: 'post',
+							dataType: 'json',
+							success: function(data){
+								$validateUsername.html(data.msg).addClass( (data.exists == true) ? 'unavailable' : 'available');
+								console.log(data.exists);
+							}
+						});
+					}, 200);
+					this.lastValue = this.value
+				}
+			} else {
+				$validateUsername
+					.html('between 5-20 characters')
+					.removeClass('available');
+			}
+		});
+	});
+
+	// I did not write this and I totally forgot where I got this from
+	// my apologies to the author (and thank you)
+	function password(length, special) {
+		var iteration = 0;
+		var password = "";
+		var randomNumber;
+		
+		if(special == undefined){
+			var special = false;
+		}
+		
+		while(iteration < length){
+			randomNumber = (Math.floor((Math.random() * 100)) % 94) + 33;
+			if(!special){
+				if ((randomNumber >=33) && (randomNumber <=47)) { continue; }
+				if ((randomNumber >=58) && (randomNumber <=64)) { continue; }
+				if ((randomNumber >=91) && (randomNumber <=96)) { continue; }
+				if ((randomNumber >=123) && (randomNumber <=126)) { continue; }
+			}
+			iteration++;
+			password += String.fromCharCode(randomNumber);
+		}
+	
+		return password;
+	}	
+</script>
 </cfoutput>

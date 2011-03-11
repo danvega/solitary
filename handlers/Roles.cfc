@@ -1,6 +1,7 @@
 component{
 
 	property name="roleService" inject="model:roleService@Solitary";
+	property name="validationService" inject="model:validationService@Solitary";
 
 	public void function index(event){
 		setNextEvent("security.roles.list");
@@ -20,9 +21,20 @@ component{
 		
 		if( !isNull(role) ){
 			role.setName(rc.name);
-			roleService.save(role);
-			getPlugin("messagebox").setMessage("info","The role #rc.name# was created successfully.");
-			setNextEvent("security.roles.list");
+			
+			if( validationService.validate(role) ){
+				roleService.save(role);
+				getPlugin("messagebox").setMessage("info","The role #rc.name# was created successfully.");
+				setNextEvent("security.roles.list");
+			} else {
+				var errors = [];
+				for(var x=1; x<= arrayLen(role.getErrors()); ++x){
+					arrayAppend(errors,role.getErrors()[x].getMessage());
+				}
+				getPlugin("messagebox").setMessage(type="error",messageArray=errors);
+				setNextEvent(event="security.roles.edit",persist="role");				
+			}
+			
 		} else {
 			roleNotFound();			
 		}
@@ -40,9 +52,11 @@ component{
 				// let the user know that this role can't be deleted because
 				// there are users associated with this role
 				getPlugin("messagebox").setMessage("error","We are unable to remove this role because it is assigned to one or more users.");
+				setNextEvent("security.roles.list");
 			}			
 		} else {			
 			getPlugin("messagebox").setMessage("error","We are unable to locate the role you are trying to remove, please try again.");
+			setNextEvent("security.roles.list");
 		}
 		
 	}		private void function roleNotFound(){

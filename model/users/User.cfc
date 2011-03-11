@@ -1,16 +1,47 @@
 component persistent="true" extends="solitary.model.BaseEntity" table="users"{
 	
 	property name="userid" column="user_id" fieldtype="id" generator="uuid" setter="false";
+	
+	/** 
+	 * @notempty 
+	 */
 	property name="firstName";
+	/** 
+	 * @notempty 
+	 */
 	property name="lastName";
+	/** 
+	 * @notempty 
+	 * @range 5,20
+	 * @custom solitary.model.validation.rules.isUniqueUsername
+	 * @custom-message That username already exists
+	 */
 	property name="userName";
-	property name="password";
+	
+	/**
+	 * @display Password
+	 * @ismatch {confirmPassword}
+	 */
+	property name="password";	
+	
+	/**
+	 * @display Confirm Password
+	 * @persistent false
+	 */
+	property name="confirmPassword";
+	
+	/** 
+	 * @notempty
+	 * @email
+	 * @custom solitary.model.validation.rules.isUniqueEmail
+	 * @custom-message That email address already exists in our system	 
+	 */
 	property name="email";
+	
 	property name="lastLogin" ormtype="timestamp";
 	property name="usernamePasswordHash" column="uph" type="string";
 	property name="emailPasswordHash" column="eph" type="string";
 	property name="passwordHasReset" type="boolean";  
-	
 	property name="roles" fieldtype="many-to-many" cfc="solitary.model.roles.Role" singularname="role" fkcolumn="user_id" inversejoincolumn="role_id" linktable="users_roles";   
 	
 	public User function init(){
@@ -27,20 +58,23 @@ component persistent="true" extends="solitary.model.BaseEntity" table="users"{
 		return roles;
 	}
 	
-	public void function addRoles(required string roles){
-		if( len(arguments.roles) ){
+	public void function addRoles(required array roles){
+		if( arrayLen(arguments.roles) ){
 			//clear roles
 			setRoles([]);
 			// for each role in list admin,author,audit,etc
-			for(var i=1; i<=listLen(arguments.roles); ++i){
-				var role = entityLoadByPK("Role",listGetAt(arguments.roles,i));
-				this.addRole(role);
+			for(var i=1; i<=arrayLen(arguments.roles); ++i){
+				this.addRole(arguments.roles[i]);
 			}
 		}
 	}	
 	
 	public void function setPassword(String password){
 		variables.password = hash(arguments.password);	
+	}
+	
+	public void function setConfirmPassword(String password){
+		variables.confirmPassword = hash(arguments.password);
 	}
 
 	public string function getName(){

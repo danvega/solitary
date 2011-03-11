@@ -1,8 +1,30 @@
 component extends="coldbox.system.orm.hibernate.VirtualEntityService" singleton {
 	
+	property name="roleService"	inject="model:roleService@solitary";
+	
 	public UserService function init(){
 		super.init(entityName="User");
 		return this;
+	}
+	
+	public void function addNewRole(required string name){		
+		var role = roleService.new();
+		role.setName(arguments.name);
+		roleService.save(role);
+	}
+	
+	public any function addRoles(required string roles){
+		var _roles = [];
+		
+		if( len(arguments.roles) ){
+			// for each role in list admin,author,audit,etc
+			for(var i=1; i<=listLen(arguments.roles); ++i){
+				var role = entityLoadByPK("Role",listGetAt(arguments.roles,i));
+				arrayAppend(_roles,role);
+			}
+		}
+		
+		return _roles;		
 	}
 	
 	public String function resetPassword(any user){

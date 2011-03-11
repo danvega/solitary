@@ -54,9 +54,11 @@ component {
 			{pattern="/changePassword", handler="security",action="changePassword"},
 			{pattern="/doChangePassword", handler="security",action="doChangePassword"},
 			{pattern="/users/list", handler="users",action="list"},
+			{pattern="/users/list/role/:id", handler="users",action="list"},
 			{pattern="/users/edit/:id?", handler="users",action="edit"},
 			{pattern="/users/save", handler="users",action="save"},
 			{pattern="/users/remove", handler="users",action="remove"},
+			{pattern="/users/usernameExists/:username", handler="users",action="usernameExists"},
 			{pattern="/roles/list", handler="roles",action="list"},
 			{pattern="/roles/edit/:id?", handler="roles",action="edit"},
 			{pattern="/roles/save", handler="roles",action="save"},
@@ -98,6 +100,14 @@ component {
 			
 		binder.map("InstallService@Solitary")
 			.to("#moduleMapping#.model.install.Install")
+			.asSingleton();
+			
+		binder.map("Validator@Solitary")
+			.to("#moduleMapping#.model.hyrule.Validator")
+			.asSingleton();	
+					
+		binder.map("ValidationService@Solitary")
+			.to("#moduleMapping#.model.ValidationService")
 			.asSingleton();
 			
 	}
