@@ -107,7 +107,7 @@ component {
 			.asSingleton();	
 					
 		binder.map("ValidationService@Solitary")
-			.to("#moduleMapping#.model.ValidationService")
+			.to("#moduleMapping#.model.validation.ValidationService")
 			.asSingleton();
 			
 	}
