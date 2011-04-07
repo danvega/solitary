@@ -16,21 +16,11 @@ that can be found in an event.
 -->
 <rules>
     <rule>
-        <whitelist>solitary:security\..*</whitelist>
+        <whitelist>solitary:security\..*,docs\..*</whitelist>
         <securelist>\..*</securelist>
         <roles>admin,author</roles>
         <permissions></permissions>
         <redirect>security/login</redirect>
 		<useSSL>false</useSSL>
     </rule>
-	<!--
-	<rule>
-		<whitelist>.*</whitelist>
-		<securelist>users\..*,roles\..*</securelist>
-		<roles>admin</roles>
-		<permissions></permissions>
-		<redirect>security/AccessDenied</redirect>
-		<useSSL>false</useSSL>
-	</rule>
-	-->
 </rules>

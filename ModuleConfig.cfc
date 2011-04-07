@@ -46,6 +46,7 @@ component {
 		// SES Routes
 		routes = [
 			{pattern="/", handler="security",action="index"},	
+			{pattern="/docs", handler="docs",action="index"},	
 			{pattern="/login", handler="security",action="login"},		
 			{pattern="/doLogin", handler="security",action="doLogin"},		
 			{pattern="/logout", handler="security",action="logout"},
