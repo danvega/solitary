@@ -2,13 +2,21 @@
 ABOUT
 --------------------------------------------------------------------------------------
 
-	 Project: Solitary Security Module (https://github.com/cfaddict/solitary)
-      Author: Daniel Vega (danvega@gmail.com)
- Description: 
- 
- 	Building a new application that requires a security in framework can be a very tedious task. A security framework usually starts off as a simple requirement and ends up growing into a project all on its own. You first decide to either copy some code from a previous project or start from scratch. What if there was a way to drop a folder into your project and have a security frameowrk in place instantly? Well now there is!
+	Project: Solitary Security Module (https://github.com/cfaddict/solitary)
+	Author: Daniel Vega (danvega@gmail.com)
 
-	When modules came out for ColdBox I thought this would be a great first project to work. Solitary is a ColdBox module that handles roles based security for your application. When you drop the module into your project it will instantly lock down your entire application and create the necessary tables in your database. Under the hood it uses the ColdBox interceptor so its fully customizable.
+ 	Building a new application that requires a security in framework can be a very 
+ 	tedious task. A security framework usually starts off as a simple requirement 
+ 	and ends up growing into a project all on its own. You first decide to either 
+ 	copy some code from a previous project or start from scratch. What if there was 
+ 	a way to drop a folder into your project and have a security framework in place 
+ 	instantly? Well now there is!
+ 	
+	When modules came out for ColdBox I thought this would be a great first project 
+	to work. Solitary is a ColdBox module that handles roles based security for 
+	your application. When you drop the module into your project it will instantly 
+	lock down your entire application and create the necessary tables in your 
+	database. Under the hood it uses the ColdBox interceptor so its fully customizable.
    
 -------------------------------------------------------------------------------------- 	
 SYSTEM REQUIREMENTS
@@ -21,9 +29,9 @@ SYSTEM REQUIREMENTS
 INSTALL INSTRUCTIONS
 --------------------------------------------------------------------------------------
 
-1.) drop the solitary folder into your modules folder {project_root}/modules/
+1.) Drop the solitary folder into your modules folder {project_root}/modules/
 
-2.) add a mapping to {project_root}/Application.cfc
+2.) Add a mapping to {project_root}/Application.cfc
 	
 	this.mappings['/solitary'] = COLDBOX_APP_ROOT_PATH & "/modules/solitary";
 
@@ -53,8 +61,6 @@ RULES
 	default rules config file as it is listed below but if you would like to read 
 	more about the security interceptor please visit
 	http://wiki.coldbox.org/wiki/Interceptors:Security.cfm.
-	
-	Example Rules File
 	
 	<?xml version="1.0" encoding="UTF-8"?>
 	<!--
