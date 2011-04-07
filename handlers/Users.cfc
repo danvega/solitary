@@ -3,14 +3,13 @@
 	property name="userService"	inject="model:userService@solitary";
 	property name="roleService"	inject="model:roleService@solitary";
 	property name="sessionStorage"	inject="coldbox:plugin:SessionStorage";
-	property name="validationService" inject="model:validationService@Solitary";
 
 	function preHandler(event,action){
 		
 	}
 	
 	public void function index(){
-		setNextEvent('users.list');
+		setNextEvent("security/users/list");
 	}
 	
 	public void function list(event){
@@ -52,25 +51,16 @@
 			userService.addNewRole(rc.addrole);
 		}
 		
-		rc.user.addRoles(roles);	
+		rc.user.addRoles(roles);
 		
-		if( validationService.validate(rc.user) ){
-			userService.save( rc.user );
-			getPlugin("MessageBox").setMessage("info","User saved!");
-			setNextEvent('security.users.list');			
-		} else {
-			var errors = [];
-			for(var x=1; x<= arrayLen(rc.user.getErrors()); ++x){
-				arrayAppend(errors,rc.user.getErrors()[x].getMessage());
-			}			
-			getPlugin("messagebox").setMessage(type="error",messageArray=errors);
-			setNextEvent(event="security.users.edit",persist="user");				
-		}
+		userService.save( rc.user );
+		getPlugin("MessageBox").setMessage("info","User saved!");
+		setNextEvent('security.users.list');
 	}
 	
 	public void function remove(event){
-		var rc 		= event.getCollection();
-		var oUser 	= userService.get(rc.userID);
+		var rc 		= event.getCollection();		
+		var oUser 	= userService.get(rc.id);
 		    	
 		if( isNull(oUser) ){
 			getPlugin("MessageBox").setMessage("warning","Invalid user detected!");
@@ -84,15 +74,15 @@
 	
 	public void function usernameExists(event) {
 		var rc = event.getCollection();
-		var user = userService.findWhere({username=rc.username});
+		var user = userService.executeQuery("from User where email = :arg OR username = :arg",{arg=rc.username},0,0,0,false);
 		var result = {};
 		
-		if( isNull(user) ){
-			result['exists'] = false;
-			result['msg'] = "username is available";
-		} else {
+		if( arrayLen(user) ){
 			result['exists'] = true;
 			result['msg'] = "username is unavailable";
+		} else {
+			result['exists'] = false;
+			result['msg'] = "username is available";
 		}
 		
 		event.renderData(type="JSON",data=result,nolayout=true);

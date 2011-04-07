@@ -13,4 +13,7 @@
 		<strong>Last Login: </strong> #dateFormat(user.lastlogin,'mm/dd/yyyy hh:mm:ss')#<br/>			
 	</p>
 	
+	<div><a href="#event.buildLink('security.sessiontracking.active')#">View All Active Sessions</a></div>
+
+	
 </cfoutput>

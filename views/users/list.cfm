@@ -1,21 +1,5 @@
 ﻿<cfoutput>
-<!--- js --->
-<cfsavecontent variable="js">
-<cfoutput>
-<script type="text/javascript">
-	function removeUser(userID){
-		if( confirm("Really delete?") ){
-			$("##userID").val( userID );
-			$("##userForm").submit();
-		}
-	}
-</script>
-</cfoutput>
-</cfsavecontent>
-<cfhtmlhead text="#js#">
-
 <h1>User Management</h1>
-<p align="right"><a href="#event.buildLink('security.users.edit')#">Create New User</a></p>
 
 #getPlugin("MessageBox").renderit()#
 
@@ -39,8 +23,9 @@
 			<td>#user.getUsername()#</td>
 			<td>#user.getDisplayLastLogin()#</td>
 			<td class="center">
+				<a href="#event.buildLink('security.users.edit')#/#user.getUserID()#" title="Edit User" class="edit action">Edit</a> 
 				<cfif rc.currentUser.userid NEQ user.getUserId()>
-					<input type="button" onclick="removeUser('#user.getUserID()#')" value="Delete"/>
+					<a href="#event.buildLink('security.users.remove')#/#user.getUserID()#" title="Delete User" class="delete action" onClick="return removeUser();">Delete</a>
 				</cfif>
 			</td>
 		</tr>
@@ -49,6 +34,14 @@
 </table>
 </form>
 
-<p align="right"><a href="#event.buildLink('security.users.edit')#">Create New User</a></p>
-
+<div class="right"><a href="#event.buildLink('security.users.edit')#" class="add" alt="Create New User">Create New User</a></div>
 </cfoutput>
+
+<script type="text/javascript">
+function removeUser(userID){
+	if( confirm("Really delete?") ){
+		return true;
+	}
+	return false;
+}
+</script>

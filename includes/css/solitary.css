@@ -1,4 +1,4 @@
-form {width:100%;margin:0px;padding:0px;}
+form {width:100%;margin:0;padding:0px;}
 fieldset{}
 legend{font-size:12px;font-weight:bold;color:#336699;}
 label{width:150px;float:left}
@@ -14,3 +14,82 @@ select {min-width:200px;}
 .available {color:green;}
 .unavailable {color:red;}
 .help {font-style:italic;}
+
+#menu {margin:10px 0 15px 0;padding:0px 10px;background:#f6f6f6;}
+#menu ul {margin:0px;padding:8px;}
+#menu li {display: inline;list-style-type: none;padding-right: 20px;}
+
+
+
+/* LOGIN */
+#action-login {
+	background:#f6f6f6;
+	margin-top:100px;
+}
+#login {
+	width:325px;
+	background:#fff;
+	margin:0px auto;
+	padding:20px;
+	border:1px solid #666;
+}
+
+#loginForm {
+	margin:10px 0 0 0;
+}
+
+#loginForm input[type="text"],#loginForm input[type="password"]{
+	width:275px;
+	font-size:135%;
+	padding:4px;
+}
+#loginForm label {
+	font-size:98%;
+	
+}
+
+#loginForm input[type="submit"] {
+	float:right;
+}
+
+.shadow {
+	-moz-box-shadow: 2px 2px 3px #666;
+	-webkit-box-shadow: 2px 2px 3px #666;
+	box-shadow: 2px 2px 3px #666;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+.round-corners {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;	
+}
+
+.right {float:right;}
+
+.edit {
+	background: url('../images/icons/database_edit.png') no-repeat;
+	padding:0 0 0 20px;
+	margin:0 10px 0 0;
+	height:30px;
+}
+.delete {
+	background: url('../images/icons/database_delete.png') no-repeat;
+	padding:0 0 0 20px;
+	margin:0 10px 0 0;
+}
+.add {
+	background: url('../images/icons/database_add.png') no-repeat;
+	padding:0 0 0 20px;
+	margin:0 10px 0 0;	
+}
+
+.action, .action:visited {color:#666;text-decoration:none;}
+.action:hover {color:#666;text-decoration:underline;}
+
+/* GOOGLE WEB FONTS */
+.logo { font-family: 'Amaranth', arial, serif; font-size:36px;}
+h1 { font-family: 'Amaranth', arial, serif; font-size:28px;}

@@ -6,12 +6,14 @@ component accessors="true" {
 	property name="defaultEvent" inject="coldbox:setting:defaultEvent";
 		
 	public void function index(event){
-		setNextEvent("security.login");
+		setNextEvent("security/login");
 	}		public void function login(event){
 		var rc = event.getCollection();
 		// if the user checks remember me we drop a cookie with their username
 		// if the cookie does not exist the cookieStorage returns an empty string
 		rc.username = cookieStorage.getVar('username');
+		
+		event.setView(name="security/login",layout="layout.login");
 	}
 
 	public void function doLogin(event){
@@ -114,6 +116,10 @@ component accessors="true" {
 			setNextEvent(event="security.changepassword",persist="newPassword,userid");
 		}
 				
+	}
+	
+	public void function accessDenied(){
+		
 	}
 		
 }

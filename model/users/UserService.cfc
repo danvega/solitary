@@ -10,7 +10,9 @@ component extends="coldbox.system.orm.hibernate.VirtualEntityService" singleton 
 	public void function addNewRole(required string name){		
 		var role = roleService.new();
 		role.setName(arguments.name);
-		roleService.save(role);
+		//roleService.save(role);
+		entitySave(role);
+		
 	}
 	
 	public any function addRoles(required string roles){

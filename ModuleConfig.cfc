@@ -53,18 +53,19 @@ component {
 			{pattern="/resetPassword/:eph", handler="security",action="resetPassword"},
 			{pattern="/changePassword", handler="security",action="changePassword"},
 			{pattern="/doChangePassword", handler="security",action="doChangePassword"},
+			{pattern="/accessDenied", handler="security",action="accessDenied"},
 			{pattern="/users/list", handler="users",action="list"},
 			{pattern="/users/list/role/:id", handler="users",action="list"},
 			{pattern="/users/edit/:id?", handler="users",action="edit"},
 			{pattern="/users/save", handler="users",action="save"},
-			{pattern="/users/remove", handler="users",action="remove"},
+			{pattern="/users/remove/:id", handler="users",action="remove"},
 			{pattern="/users/usernameExists/:username", handler="users",action="usernameExists"},
 			{pattern="/roles/list", handler="roles",action="list"},
 			{pattern="/roles/edit/:id?", handler="roles",action="edit"},
 			{pattern="/roles/save", handler="roles",action="save"},
-			{pattern="/roles/remove", handler="roles",action="remove"},
+			{pattern="/roles/remove/:id", handler="roles",action="remove"},
 			{pattern="/sessiontracking/current", handler="sessiontracking",action="current"},		
-			{pattern="/sessiontracking/active", handler="sessiontracking",action="active"}					
+			{pattern="/sessiontracking/active", handler="sessiontracking",action="active"}				
 		];
 		
 		// Custom Declared Points
@@ -101,15 +102,6 @@ component {
 		binder.map("InstallService@Solitary")
 			.to("#moduleMapping#.model.install.Install")
 			.asSingleton();
-			
-		binder.map("Validator@Solitary")
-			.to("#moduleMapping#.model.hyrule.Validator")
-			.asSingleton();	
-					
-		binder.map("ValidationService@Solitary")
-			.to("#moduleMapping#.model.validation.ValidationService")
-			.asSingleton();
-			
 	}
 	
 	/**
@@ -117,6 +109,7 @@ component {
 	 */
 	public void function onLoad(){
 		var setupPath = getDirectoryFromPath(getCurrentTemplatePath()) & "config\setup.xml";
+		var installService = binder.getInjector().getInstance("InstallService@Solitary");
 		
 		// if a file named setup.xml exists in the config folder lets install some default data	
 		if( fileExists(setupPath) ){

@@ -1,10 +1,9 @@
 component{
 
 	property name="roleService" inject="model:roleService@Solitary";
-	property name="validationService" inject="model:validationService@Solitary";
 
 	public void function index(event){
-		setNextEvent("security.roles.list");
+		setNextEvent("security/roles/list");
 	}		public void function list(event){
 		var rc = event.getCollection();
 		rc.roles = roleService.list(orderby="name",asQuery=false);
@@ -21,33 +20,24 @@ component{
 		
 		if( !isNull(role) ){
 			role.setName(rc.name);
-			
-			if( validationService.validate(role) ){
-				roleService.save(role);
-				getPlugin("messagebox").setMessage("info","The role #rc.name# was created successfully.");
-				setNextEvent("security.roles.list");
-			} else {
-				var errors = [];
-				for(var x=1; x<= arrayLen(role.getErrors()); ++x){
-					arrayAppend(errors,role.getErrors()[x].getMessage());
-				}
-				getPlugin("messagebox").setMessage(type="error",messageArray=errors);
-				setNextEvent(event="security.roles.edit",persist="role");				
-			}
-			
+			roleService.save(role);
+			getPlugin("messagebox").setMessage("info","The role #rc.name# was created successfully.");
+			setNextEvent("security.roles.list");
 		} else {
 			roleNotFound();			
 		}
 	}		public void function remove(event){
-		var rc = event.getCollection();
-		var role = roleService.get( event.getValue("roleid","") );
+		var rc = event.getCollection();		
+		var role = roleService.get( rc.id );
 				
 		if( !isNull(role)){
 			// we have a valid role, is it deleteable
 			if( role.canBeDeleted() ){
+				getPlugin("messagebox").setMessage("info","The role #role.getName()# was deleted successfully.");
 				// delete the role
 				roleService.delete(role);
-				setNextEvent("security.roles.list");
+				setNextEvent("security/roles/list");
+				
 			} else {
 				// let the user know that this role can't be deleted because
 				// there are users associated with this role

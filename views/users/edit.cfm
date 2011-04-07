@@ -3,7 +3,11 @@
 #getPlugin("MessageBox").renderit()#
 <form action="#event.buildLink('security.users.save')#" method="POST" name="newPostForm">
 	<input type="hidden" name="userID" id="userID" value="#rc.user.getUserID()#" />
-	
+	<cfif len(rc.user.getUserId())>
+		<input type="hidden" name="context" value="update">
+	<cfelse>
+		<input type="hidden" name="context" value="create">		
+	</cfif>
 	<fieldset>
 		<legend>General Information</legend>
 		<div>
@@ -14,21 +18,27 @@
 			<label for="lastName">Last Name:</label>
 			<input type="text" name="lastname" value="#rc.user.getLastName()#"/>
 		</div>
-	
+		<cfif NOT len(rc.user.getUserID())>
 		<div>
 			<label for="email">Email Address:</label>
 			<input type="text" name="email" value="#rc.user.getEmail()#"/>
-		</div>		
+		</div>
+		<cfelse>
+		<div>
+			<label for="email">Email Address:</label>
+			#rc.user.getEmail()#
+		</div>					
+		</cfif>
 	</fieldset>
 	
 	<fieldset>
 		<legend>Login Information</legend>
+		<cfif NOT len(rc.user.getUserID())>
 		<div>
 			<label for="username">Username:</label>
 			<input type="text" id="username" name="username" value="#rc.user.getUsername()#"/>
 			<span id="validateUsername" class="help">between 5-20 characters</span>
 		</div>		
-		<cfif NOT len(rc.user.getUserID())>
 		<div>
 			<label for="password">Password:</label>
 			<input type="password" name="password" value=""/>
@@ -38,7 +48,13 @@
 			<label for="confirmPassword">Confirm Password:</label>
 			<input type="password" name="confirmPassword" value=""/>
 		</div>
-		</cfif>
+		<cfelse>
+		<div>
+			<label for="username">Username:</label>
+			#rc.user.getUsername()#
+		</div>		
+			
+		</cfif>		
 		<div>
 			<label for="roles">Role(s):</label>
 			<select name="roles" multiple="true">
@@ -92,6 +108,12 @@
 							success: function(data){
 								$validateUsername.html(data.msg).addClass( (data.exists == true) ? 'unavailable' : 'available');
 								console.log(data.exists);
+							},
+							error : function(xhr,textStatus,errorThrown){
+								$validateUsername
+									.html('there was an error checking username status, please refresh the page')
+									.removeClass('available')
+									.removeClass('unavailable');								
 							}
 						});
 					}, 200);

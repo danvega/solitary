@@ -1,50 +1,25 @@
 component persistent="true" extends="solitary.model.BaseEntity" table="users"{
 	
 	property name="userid" column="user_id" fieldtype="id" generator="uuid" setter="false";
-	
-	/** 
-	 * @notempty 
-	 */
 	property name="firstName";
-	
-	/** 
-	 * @notempty 
-	 */
 	property name="lastName";
-	
-	/** 
-	 * @notempty 
-	 * @range 5,20
-	 * @custom solitary.model.validation.rules.isUniqueUsername
-	 * @custom-message That username already exists
-	 */
 	property name="userName";
-	
-	/**
-	 * @display Password
-	 * @ismatch {confirmPassword}
-	 */
 	property name="password";	
-	
-	/**
-	 * @display Confirm Password
-	 * @persistent false
-	 */
-	property name="confirmPassword";
-	
-	/** 
-	 * @notempty
-	 * @email
-	 * @custom solitary.model.validation.rules.isUniqueEmail
-	 * @custom-message That email address already exists in our system	 
-	 */
+	property name="confirmPassword" persistent="false";
 	property name="email";
-	
 	property name="lastLogin" ormtype="timestamp";
 	property name="usernamePasswordHash" column="uph" type="string";
 	property name="emailPasswordHash" column="eph" type="string";
 	property name="passwordHasReset" type="boolean";  
 	property name="roles" fieldtype="many-to-many" cfc="solitary.model.roles.Role" singularname="role" fkcolumn="user_id" inversejoincolumn="role_id" linktable="users_roles";   
+	
+	this.constraints = [
+		{property="firstName",blank=false},
+		{property="lastName",blank=false},
+		{property="email",email=true,unique=true,context="create"},
+		{property="userName",size="6..20",unique=true,context="create"},
+		{property="password",size="6..20",context="create"}
+	];
 	
 	public User function init(){
 		roles = [];

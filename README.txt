@@ -3,15 +3,18 @@ ABOUT
 --------------------------------------------------------------------------------------
 
     Who: Daniel Vega (danvega@gmail.com)
-   What: Solitary
   Where: http://www.danvega.org/blog	
    When: 2/26/2011
-
+   What: A ColdBox module that handles roles based security for your application. 
+   	     By default this will lock down your entire application and allow you
+   	     to create users/roles. It is fully customizeable so that you can secure
+   	     only certain routes/controllers/actions. 
+   
 -------------------------------------------------------------------------------------- 	
 SYSTEM REQUIREMENTS
 --------------------------------------------------------------------------------------
 
-	Coldbox 3.0 RC2
+	Coldbox 3.0
 	ColdFusion 9.0.1
 
 --------------------------------------------------------------------------------------
@@ -36,6 +39,13 @@ INSTALL INSTRUCTIONS
 	};
 
 --------------------------------------------------------------------------------------
+USAGE
+--------------------------------------------------------------------------------------
+
+	
+	
+
+--------------------------------------------------------------------------------------
 NOTES
 --------------------------------------------------------------------------------------
 
@@ -53,29 +63,9 @@ NOTES
 		include = [],
 		// An array of modules names to NOT load, empty means none
 		exclude = [] 
-	};	
+	};
 	
 	* Update your robots.txt so this module doesn't get picked up by the search engine
  		
  	  Disallow: /modules/solitary
-	
---------------------------------------------------------------------------------------
-FUTURE DEVELOPMENT IDEAS
---------------------------------------------------------------------------------------		
- 
- internationalization (i8ln) for all text + messages
- Google Analytics Plugin
- Audit Trail (login/logout/forgotpass/)
- Permissions based rules for roles
- Import data / Data Migration
- Different email templates HTML/Text/PDF/Image
- Additional methods to send notifications Email/SMS/Twitter
- Session Track (current/all)
- Username/Password requirements configuration
- 
---------------------------------------------------------------------------------------
-BUGS
---------------------------------------------------------------------------------------		
-
-	if user.getLastName() is null (or any prop for that matter) we have an error in mail service. 	
- 
+ 	  
