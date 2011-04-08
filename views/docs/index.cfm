@@ -35,6 +35,8 @@
 	<br/>
 	
 	<h2><a name="usage">Usage</a></h2>
+	<p>Once you have the module installed just navigate to your application with the following url parameters ?ormReload&fwreinit. Basically you have to reload your ORM application to add the database tables needed and you need to re initialize the ColdBox application to load the module. </p>
+	<p>You should now be presented with a login screen. I think this is the great thing about this module. All of the views / business logic has already been built for you! Please view the video tutorial below to learn more about how the module works.</p>
 	
 	<h2><a name="videos">Video Tutorials</a></h2>
 
