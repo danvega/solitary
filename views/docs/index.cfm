@@ -35,10 +35,14 @@
 	<br/>
 	
 	<h2><a name="usage">Usage</a></h2>
-	<p>Once you have the module installed just navigate to your application with the following url parameters ?ormReload&fwreinit. Basically you have to reload your ORM application to add the database tables needed and you need to re initialize the ColdBox application to load the module. </p>
+	<p>Once you have the module installed just navigate to your application and reload ORM (?ormReload). Once that is done you can reiniatilize the application so the module is found.Basically you have to reload your ORM application to add the database tables needed and you need to re initialize the ColdBox application to load the module. Of course this is not needed if this is the first time you are launching the application. </p>
 	<p>You should now be presented with a login screen. I think this is the great thing about this module. All of the views / business logic has already been built for you! Please view the video tutorial below to learn more about how the module works.</p>
 	
 	<h2><a name="videos">Video Tutorials</a></h2>
+	<p>Part 1: Introduction & Installation - <a href="http://vimeo.com/22110435">http://vimeo.com/22110435</a></p>	
+	<p>Part 2: Features  - <a href="http://vimeo.com/22111233">http://vimeo.com/22111233</a></p>
+	
+
 
 	<h2><a name="support">Support</a></h2>
 	<p>Please visit the source code repository at <a href="https://github.com/cfaddict/solitary">https://github.com/cfaddict/solitary</a>. From there you can contact me as well as file bugs.

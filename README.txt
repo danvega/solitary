@@ -49,8 +49,6 @@ INSTALL INSTRUCTIONS
 --------------------------------------------------------------------------------------
 USAGE
 --------------------------------------------------------------------------------------
-
-	When you have loaded the module please visit /docs to view the documentation.
 	
 	Once you have the module installed just navigate to your application and reload
 	ORM (?ormReload). Once that is done you can reiniatilize the application so the 
@@ -63,13 +61,16 @@ USAGE
 	about this module. All of the views / business logic has already been built for 
 	you! Please view the video tutorial below to learn more about how the module works.
 
+	When you have loaded the module please visit /docs to view the documentation.
 
 --------------------------------------------------------------------------------------
 VIDEO TUTORIALS
 --------------------------------------------------------------------------------------
 
-
-
+	Part 1: Introduction & Installation - http://vimeo.com/22110435
+		
+	Part 2: Features - http://vimeo.com/22111233
+	
 --------------------------------------------------------------------------------------
 RULES
 --------------------------------------------------------------------------------------
